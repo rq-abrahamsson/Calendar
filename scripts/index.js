@@ -8,6 +8,8 @@ import configureStore from './store/configureStore';
 
 import App from './App';
 
+//import '../node_modules/bootstrap/dist/css/bootstrap.css'
+
 const initialState = {};
 
 const store = configureStore(initialState, browserHistory);
@@ -15,14 +17,14 @@ const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
 
 function onUpdate() {
-    console.log("UPDATE");
+  console.log("UPDATE");
 }
 
 render(
-        <Provider store={store}>
-        <Router history={history} onUpdate={onUpdate} >
-        {routes}
-    </Router>
-        </Provider>
-    ,document.getElementById('root')
+  <Provider store={store}>
+  <Router history={history} onUpdate={onUpdate} >
+  {routes}
+  </Router>
+  </Provider>
+  ,document.getElementById('root')
 );
