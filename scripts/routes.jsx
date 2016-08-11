@@ -28,8 +28,11 @@ export default (store) => {
   };
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={Test} />
+      <IndexRoute component={Test}/>
+      <Route path="test" component={Test} />
       <Route path="calendar" component={Calendar} />
     </Route>
   );
 };
+
+
