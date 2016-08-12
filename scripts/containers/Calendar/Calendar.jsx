@@ -68,6 +68,7 @@ class Calendar extends React.Component {
 
   removeEvent() {
     this.props.dispatch(removeEvent(this.state.selectedEvent));
+    this.close();
   }
 
   updateEvent() {

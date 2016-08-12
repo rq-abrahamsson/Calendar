@@ -16,7 +16,7 @@ const isProdEnv = (process.env.NODE_ENV === 'production');
 
 const app = express();
 app.use(cors());
-app.set('port', config.port || 3000);
+app.set('port', config.port || 5000);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -47,7 +47,7 @@ if (!isProdEnv){
 // serve root index.html
 app.get('/', function(req, res) {
     //res.sendFile(path.join(__dirname, 'index.html'));
-    res.sendFile(path.join(__dirname, 'public/bundle.js'));
+    res.sendFile(path.join(__dirname, 'static/bundle.js'));
 });
 
 const server = http.createServer(app);
