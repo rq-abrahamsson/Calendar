@@ -21,6 +21,9 @@ const Navigation = () => {
         <LinkContainer to={{ pathname:'/calendar' }}>
           <NavItem> Calendar</NavItem>
         </LinkContainer>
+        <LinkContainer to={{ pathname:'/login'}}>
+          <NavItem> Login </NavItem>
+        </LinkContainer>
       </Nav>
     </Navbar>
   );

@@ -15,7 +15,7 @@ let webpack, webpackMiddleware, webpackCompiler;
 const isProdEnv = (process.env.NODE_ENV === 'production');
 
 const app = express();
-app.use(cors());
+//app.use(cors());
 app.set('port', config.port || 3000);
 
 // uncomment after placing your favicon in /public
@@ -24,41 +24,53 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-if (!isProdEnv){
-    webpack = require('webpack');
-    webpackMiddleware = require('webpack-dev-middleware');
-    webpackCompiler = webpack(config);
+/*if (!isProdEnv){
+  webpack = require('webpack');
+  webpackMiddleware = require('webpack-dev-middleware');
+  webpackCompiler = webpack(config);
 
-    app.use(webpackMiddleware(webpackCompiler, {
-        publicPath: config.output.publicPath,
-        hot: true,
-        stats: {
-            colors: true,
-            errorDetails: true
-        },
+  app.use(webpackMiddleware(webpackCompiler, {
+    publicPath: config.output.publicPath,
+    hot: true,
+    stats: {
+      colors: true,
+      errorDetails: true
+    },
         watchOptions: {
-            aggregateTimeout: 300,
-            poll: true
+          aggregateTimeout: 300,
+          poll: true
         }
-    }));
-    app.use(require('webpack-hot-middleware')(webpackCompiler, {
-        log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
-    }));
-}
+  }));
+  app.use(require('webpack-hot-middleware')(webpackCompiler, {
+    log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
+  }));
+}*/
 
-// serve root index.html
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', false);
+  res.setHeader('Access-Control-Allow-Origin', 'http://' + require('ip').address() + ':5000');
+  if (req.method === 'OPTIONS') {
+    res.send(200);
+  } else {
+    next();
+  }
 });
+
+/*// serve root index.html
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});*/
 
 const server = http.createServer(app);
 server.listen(app.get('port'), '0.0.0.0', function(err){
-    if (err) {
-        logger.error(err);
-        throw err;
-    }
-    const addrInfo = server.address();
-    logger.info('Listening on', addrInfo.address, addrInfo.port);
+  if (err) {
+    logger.error(err);
+    throw err;
+  }
+  const addrInfo = server.address();
+  logger.info('Listening on', addrInfo.address, addrInfo.port);
 });
 
 

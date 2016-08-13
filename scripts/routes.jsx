@@ -3,7 +3,8 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './App.js';
 import Calendar from './containers/Calendar/Calendar';
-import Test from './containers/Test.jsx'
+import Test from './containers/Test.jsx';
+import Login from './containers/Login.jsx';
 
 export default (store) => {
   const requireAuth = (nextState, replace, callback) => {
@@ -31,6 +32,7 @@ export default (store) => {
       <IndexRoute component={Test}/>
       <Route path="test" component={Test} />
       <Route path="calendar" component={Calendar} />
+      <Route path="login" component={Login} />
     </Route>
   );
 };
